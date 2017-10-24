@@ -1,0 +1,5 @@
+package: golang.cisco.com/atom/zlog
+import:
+- package: github.com/rs/zerolog
+testImport:
+- package: github.com/smartystreets/goconvey/convey
