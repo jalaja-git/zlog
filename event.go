@@ -5,4 +5,5 @@ type Event interface {
 	Msg(msg string)
 	Str(key string, val string) Event
 	Int(key string, val int) Event
+	Err(e error) Event
 }

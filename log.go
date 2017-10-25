@@ -77,4 +77,6 @@ type Context interface {
 	Logger() Logger
 	Str(key string, val string) Context
 	Int(key string, val int) Context
+	Err(e error) Context
+	Bool(key string, val bool) Context
 }

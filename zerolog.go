@@ -39,7 +39,9 @@ func (l logImpl) Level(lvl Level) Logger {
 }
 
 func (l logImpl) With() Context {
-	return ctxImpl{l.Logger.With(), l}
+	zctx := l.Logger.With()
+	l.Logger = zctx.Logger()
+	return ctxImpl{zctx, l}
 }
 
 func (l logImpl) Debug() Event {
@@ -93,6 +95,11 @@ func (e eventImpl) Msg(msg string) {
 	e.Event.Msg(msg)
 }
 
+func (e eventImpl) Err(er error) Event {
+	e.Event.Err(er)
+	return e
+}
+
 type ctxImpl struct {
 	zerolog.Context
 	l logImpl
@@ -103,11 +110,30 @@ func (c ctxImpl) Logger() Logger {
 }
 
 func (c ctxImpl) Str(key string, val string) Context {
-	c.Context.Str(key, val)
+	c.Context = c.Context.Str(key, val)
+	c.l.Logger = c.Context.Logger()
 	return c
 }
 
 func (c ctxImpl) Int(key string, val int) Context {
-	c.Context.Int(key, val)
+	c.Context = c.Context.Int(key, val)
+	c.l.Logger = c.Context.Logger()
+	return c
+}
+
+// Err adds the field "error" with err as a string to the logger context.
+// To customize the key name, change zerolog.ErrorFieldName.
+func (c ctxImpl) Err(err error) Context {
+	if err != nil {
+		c.Context = c.Context.Err(err)
+		c.l.Logger = c.Context.Logger()
+	}
+	return c
+}
+
+// Bool adds the field key with val as a bool to the logger context.
+func (c ctxImpl) Bool(key string, val bool) Context {
+	c.Context = c.Context.Bool(key, val)
+	c.l.Logger = c.Context.Logger()
 	return c
 }
