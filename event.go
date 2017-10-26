@@ -1,5 +1,6 @@
 package zlog
 
+// Event provides a log event interface.
 type Event interface {
 
 	// Enabled return false if the *Event is going to be filtered out by
