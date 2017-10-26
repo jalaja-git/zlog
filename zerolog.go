@@ -95,7 +95,7 @@ func (e eventImpl) Msg(msg string) {
 	e.Event.Msg(msg)
 }
 
-func (e eventImpl) Err(er error) Event {
+func (e eventImpl) Error(er error) Event {
 	e.Event.Err(er)
 	return e
 }
@@ -129,7 +129,7 @@ func (c ctxImpl) Int(key string, val int) Context {
 
 // Err adds the field "error" with err as a string to the logger context.
 // To customize the key name, change zerolog.ErrorFieldName.
-func (c ctxImpl) Err(err error) Context {
+func (c ctxImpl) Error(err error) Context {
 	if err != nil {
 		c.Context = c.Context.Err(err)
 	}

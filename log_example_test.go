@@ -71,7 +71,7 @@ func ExampleLogger_Error() {
 	log := zlog.New("tst_logger")
 
 	log.Error().
-		Err(errors.New("some error")).
+		Error(errors.New("some error")).
 		Msg("error doing something")
 
 	// Output: {"level":"error","name":"tst_logger","error":"some error","message":"error doing something"}
@@ -104,8 +104,8 @@ func ExampleEvent_Timestamp() {
 func ExampleContext() {
 	log := zlog.New("tst_logger")
 	l := log.With().Int("n", 100).Bool("b", false).Str("t", "test").Logger()
-	l = l.With().Err(nil).Logger()
-	l = l.With().Err(fmt.Errorf("test error")).Logger()
+	l = l.With().Error(nil).Logger()
+	l = l.With().Error(fmt.Errorf("test error")).Logger()
 	l.Info().Msg("context test")
 
 	// Output: {"level":"info","name":"tst_logger","n":100,"b":false,"t":"test","error":"test error","message":"context test"}
