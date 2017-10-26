@@ -16,36 +16,6 @@ func ExampleNew() {
 	// Output: {"level":"info","name":"tst_logger","message":"hello world"}
 }
 
-func ExampleLogger_msg() {
-	log := zlog.New("tst_logger")
-
-	log.Debug().
-		Str("foo", "bar").
-		Str("bar", "baz").
-		Msg("")
-
-	// Output: {"level":"debug","name":"tst_logger","foo":"bar","bar":"baz"}
-}
-
-func ExampleLogger() {
-	log := zlog.New("tst_logger").
-		With().
-		Str("foo", "bar").
-		Logger()
-
-	log.Info().Msg("hello world")
-
-	// Output: {"level":"info","name":"tst_logger","foo":"bar","message":"hello world"}
-}
-func ExampleLogger_level() {
-	log := zlog.New("tst_logger").Level(zlog.Warn)
-
-	log.Info().Msg("filtered out message")
-	log.Error().Msg("kept message")
-
-	// Output: {"level":"error","name":"tst_logger","message":"kept message"}
-}
-
 func ExampleLogger_info() {
 	log := zlog.New("tst_logger")
 
@@ -76,6 +46,36 @@ func ExampleLogger_error() {
 
 	// Output: {"level":"error","name":"tst_logger","error":"some error","message":"error doing something"}
 }
+func ExampleLogger_msg() {
+	log := zlog.New("tst_logger")
+
+	log.Debug().
+		Str("foo", "bar").
+		Str("bar", "baz").
+		Msg("")
+
+	// Output: {"level":"debug","name":"tst_logger","foo":"bar","bar":"baz"}
+}
+
+func ExampleLogger_level() {
+	log := zlog.New("tst_logger").Level(zlog.Warn)
+
+	log.Info().Msg("filtered out message")
+	log.Error().Msg("kept message")
+
+	// Output: {"level":"error","name":"tst_logger","message":"kept message"}
+}
+
+func ExampleLogger_with() {
+	log := zlog.New("tst_logger").
+		With().
+		Str("foo", "bar").
+		Logger()
+
+	log.Info().Msg("hello world")
+
+	// Output: {"level":"info","name":"tst_logger","foo":"bar","message":"hello world"}
+}
 
 func ExampleLogger_write() {
 	log := zlog.New("tst_logger").With().
@@ -90,7 +90,7 @@ func ExampleLogger_write() {
 	// Output: {"name":"tst_logger","foo":"bar","message":"hello world"}
 }
 
-func ExampleEvent() {
+func ExampleEvent_timestamp() {
 	log := zlog.New("tst_logger")
 	log = log.Level(zlog.Warn)
 	// We cant test timestamp as its a moving target, lets filter it out
@@ -99,6 +99,18 @@ func ExampleEvent() {
 	log.Warn().Msg("hello world")
 
 	// Output: {"level":"warn","name":"tst_logger","message":"hello world"}
+}
+
+func ExampleEvent_uint() {
+	log := zlog.New("tst_logger")
+	log.Info().Uint("uint", 1000).Msg("hello world")
+	// Output: {"level":"info","name":"tst_logger","uint":1000,"message":"hello world"}
+}
+
+func ExampleEvent_float32() {
+	log := zlog.New("tst_logger")
+	log.Info().Float32("float32", 5.5555).Msg("hello world")
+	// Output: {"level":"info","name":"tst_logger","float32":5.5555,"message":"hello world"}
 }
 
 func ExampleContext_with() {
