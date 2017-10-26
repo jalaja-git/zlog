@@ -16,7 +16,7 @@ func TestLogger(t *testing.T) {
 		l.Info().Str("hello", "world").Msg("Test")
 		l.Info().Int("Int value", 1000).Msg("Printing Int")
 		l.Info().Msg("Printing Message only")
-		l.Info().Err(errors.New("Error event")).Msg("Printing Error event")
+		l.Info().Timestamp().Msg("Testing Timestamp event")
 
 		log := l.With().Str("with_key", "with_val").Logger()
 		log.Info().Msg("Str - With Testing")

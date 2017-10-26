@@ -6,4 +6,5 @@ type Event interface {
 	Str(key string, val string) Event
 	Int(key string, val int) Event
 	Err(e error) Event
+	Timestamp() Event
 }

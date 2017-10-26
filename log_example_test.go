@@ -2,6 +2,7 @@ package zlog_test
 
 import (
 	"errors"
+	"fmt"
 	stdlog "log"
 
 	"github.com/rs/zlog"
@@ -89,18 +90,12 @@ func ExampleLogger_Write() {
 	// Output: {"name":"tst_logger","foo":"bar","message":"hello world"}
 }
 
-/*
-func ExampleEvent_Dict() {
+func ExampleEvent_Timestamp() {
 	log := zlog.New("tst_logger")
+	fmt.Println("h")
 
 	log.Info().
-		Str("foo", "bar").
-		Dict("dict", zlog.Dict().
-			Str("bar", "baz").
-			Int("n", 1),
-		).
-		Msg("hello world")
+		Timestamp().Msg("hello world")
 
-	// Output: {"foo":"bar","dict":{"bar":"baz","n":1},"message":"hello world"}
+	// Out: {"level":"info","name":"tst_logger","time":"2017-10-25T18:35:08-07:00","message":"hello world"}
 }
-*/

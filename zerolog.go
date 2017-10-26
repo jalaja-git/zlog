@@ -100,24 +100,30 @@ func (e eventImpl) Err(er error) Event {
 	return e
 }
 
+// Timestamp adds the current local time as UNIX timestamp to the *Event context with the "time" key.
+// To customize the key name, change zerolog.TimestampFieldName.
+func (e eventImpl) Timestamp() Event {
+	e.Event.Timestamp()
+	return e
+}
+
 type ctxImpl struct {
 	zerolog.Context
 	l logImpl
 }
 
 func (c ctxImpl) Logger() Logger {
+	c.l.Logger = c.Context.Logger()
 	return c.l
 }
 
 func (c ctxImpl) Str(key string, val string) Context {
 	c.Context = c.Context.Str(key, val)
-	c.l.Logger = c.Context.Logger()
 	return c
 }
 
 func (c ctxImpl) Int(key string, val int) Context {
 	c.Context = c.Context.Int(key, val)
-	c.l.Logger = c.Context.Logger()
 	return c
 }
 
@@ -126,7 +132,6 @@ func (c ctxImpl) Int(key string, val int) Context {
 func (c ctxImpl) Err(err error) Context {
 	if err != nil {
 		c.Context = c.Context.Err(err)
-		c.l.Logger = c.Context.Logger()
 	}
 	return c
 }
@@ -134,6 +139,6 @@ func (c ctxImpl) Err(err error) Context {
 // Bool adds the field key with val as a bool to the logger context.
 func (c ctxImpl) Bool(key string, val bool) Context {
 	c.Context = c.Context.Bool(key, val)
-	c.l.Logger = c.Context.Logger()
+	//c.l.Logger = c.Context.Logger()
 	return c
 }
