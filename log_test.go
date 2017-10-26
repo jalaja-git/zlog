@@ -27,6 +27,8 @@ func TestLogger(t *testing.T) {
 		Convey("Disable Info log level", func() {
 			wl := l.Level(Warn)
 			So(wl.Info().Enabled(), ShouldBeFalse)
+			So(wl.Warn().Enabled(), ShouldBeTrue)
+			So(wl.Error().Enabled(), ShouldBeTrue)
 		})
 
 		Convey("Fatal and panic events must be non-nil", func() {
