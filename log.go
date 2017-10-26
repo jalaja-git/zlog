@@ -51,12 +51,36 @@ type Logger interface {
 
 	// Level sets logger to the minimum accepted log level.
 	Level(lvl Level) Logger
+
+	// With creates a child logger with the field added to its context.
 	With() Context
+
+	// Debug starts a new message with debug level.
+	// You must call Msg on the returned event in order to send the event.
 	Debug() Event
+
+	// Info starts a new message with info level.
+	// You must call Msg on the returned event in order to send the event.
 	Info() Event
+
+	// Warn starts a new message with warn level.
+	// You must call Msg on the returned event in order to send the event.
 	Warn() Event
+
+	// Error starts a new message with error level.
+	// You must call Msg on the returned event in order to send the event.
 	Error() Event
+
+	// Fatal starts a new message with fatal level. The os.Exit(1) function
+	// is called by the Msg method.
+	//
+	// You must call Msg on the returned event in order to send the event.
 	Fatal() Event
+
+	// Panic starts a new message with panic level. The message is also sent
+	// to the panic function.
+	//
+	// You must call Msg on the returned event in order to send the event.
 	Panic() Event
 }
 
@@ -73,10 +97,20 @@ func NewWithStream(name string, w io.Writer, lvl Level) Logger {
 	return newZeroLogger(name, w, lvl)
 }
 
+// Context configures a new sub-logger with contextual fields.
 type Context interface {
+	// Logger returns the logger with the context previously set.
 	Logger() Logger
+
+	// Str adds the field key with val as a string to the logger context.
 	Str(key string, val string) Context
+
+	// Int adds the field key with i as a int to the logger context.
 	Int(key string, val int) Context
-	Err(e error) Context
+
+	// Err adds the field "error" with err as a string to the logger context.
+	Error(e error) Context
+
+	// Bool adds the field key with val as a bool to the logger context.
 	Bool(key string, val bool) Context
 }

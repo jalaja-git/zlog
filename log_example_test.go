@@ -16,7 +16,7 @@ func ExampleNew() {
 	// Output: {"level":"info","name":"tst_logger","message":"hello world"}
 }
 
-func ExampleLogger_Msg() {
+func ExampleLogger_msg() {
 	log := zlog.New("tst_logger")
 
 	log.Debug().
@@ -27,7 +27,7 @@ func ExampleLogger_Msg() {
 	// Output: {"level":"debug","name":"tst_logger","foo":"bar","bar":"baz"}
 }
 
-func ExampleLogger_With() {
+func ExampleLogger() {
 	log := zlog.New("tst_logger").
 		With().
 		Str("foo", "bar").
@@ -37,7 +37,7 @@ func ExampleLogger_With() {
 
 	// Output: {"level":"info","name":"tst_logger","foo":"bar","message":"hello world"}
 }
-func ExampleLogger_Level() {
+func ExampleLogger_level() {
 	log := zlog.New("tst_logger").Level(zlog.Warn)
 
 	log.Info().Msg("filtered out message")
@@ -46,7 +46,7 @@ func ExampleLogger_Level() {
 	// Output: {"level":"error","name":"tst_logger","message":"kept message"}
 }
 
-func ExampleLogger_Info() {
+func ExampleLogger_info() {
 	log := zlog.New("tst_logger")
 
 	log.Info().
@@ -57,7 +57,7 @@ func ExampleLogger_Info() {
 	// Output: {"level":"info","name":"tst_logger","foo":"bar","n":123,"message":"hello world"}
 }
 
-func ExampleLogger_Warn() {
+func ExampleLogger_warn() {
 	log := zlog.New("tst_logger")
 
 	log.Warn().
@@ -67,17 +67,17 @@ func ExampleLogger_Warn() {
 	// Output: {"level":"warn","name":"tst_logger","foo":"bar","message":"a warning message"}
 }
 
-func ExampleLogger_Error() {
+func ExampleLogger_error() {
 	log := zlog.New("tst_logger")
 
 	log.Error().
-		Err(errors.New("some error")).
+		Error(errors.New("some error")).
 		Msg("error doing something")
 
 	// Output: {"level":"error","name":"tst_logger","error":"some error","message":"error doing something"}
 }
 
-func ExampleLogger_Write() {
+func ExampleLogger_write() {
 	log := zlog.New("tst_logger").With().
 		Str("foo", "bar").
 		Logger()
@@ -90,7 +90,7 @@ func ExampleLogger_Write() {
 	// Output: {"name":"tst_logger","foo":"bar","message":"hello world"}
 }
 
-func ExampleEvent_Timestamp() {
+func ExampleEvent() {
 	log := zlog.New("tst_logger")
 	log = log.Level(zlog.Warn)
 	// We cant test timestamp as its a moving target, lets filter it out
@@ -101,11 +101,15 @@ func ExampleEvent_Timestamp() {
 	// Output: {"level":"warn","name":"tst_logger","message":"hello world"}
 }
 
-func ExampleContext() {
+func ExampleContext_with() {
 	log := zlog.New("tst_logger")
-	l := log.With().Int("n", 100).Bool("b", false).Str("t", "test").Logger()
-	l = l.With().Err(nil).Logger()
-	l = l.With().Err(fmt.Errorf("test error")).Logger()
+	ctx := log.With()
+	// Add Int, Bool and Str context to every log
+	l := ctx.Int("n", 100).Bool("b", false).Str("t", "test").Logger()
+	// Add Error context in addition to  above contexts.
+	l = l.With().Error(nil).Logger()
+	// Add one more Error Event in addition to above contexts.
+	l = l.With().Error(fmt.Errorf("test error")).Logger()
 	l.Info().Msg("context test")
 
 	// Output: {"level":"info","name":"tst_logger","n":100,"b":false,"t":"test","error":"test error","message":"context test"}
