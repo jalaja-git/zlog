@@ -5,7 +5,7 @@ import (
 	"fmt"
 	stdlog "log"
 
-	"github.com/rs/zlog"
+	"github.com/atom-deps/zlog"
 )
 
 func ExampleNew() {
@@ -16,7 +16,7 @@ func ExampleNew() {
 	// Output: {"level":"info","name":"tst_logger","message":"hello world"}
 }
 
-func ExampleLogger_Log() {
+func ExampleLogger_Msg() {
 	log := zlog.New("tst_logger")
 
 	log.Debug().
@@ -92,10 +92,21 @@ func ExampleLogger_Write() {
 
 func ExampleEvent_Timestamp() {
 	log := zlog.New("tst_logger")
-	fmt.Println("h")
+	log = log.Level(zlog.Warn)
+	// We cant test timestamp as its a moving target, lets filter it out
+	// and figure it out later
+	log.Info().Timestamp().Msg("hello world")
+	log.Warn().Msg("hello world")
 
-	log.Info().
-		Timestamp().Msg("hello world")
+	// Output: {"level":"warn","name":"tst_logger","message":"hello world"}
+}
 
-	// Out: {"level":"info","name":"tst_logger","time":"2017-10-25T18:35:08-07:00","message":"hello world"}
+func ExampleContext() {
+	log := zlog.New("tst_logger")
+	l := log.With().Int("n", 100).Bool("b", false).Str("t", "test").Logger()
+	l = l.With().Err(nil).Logger()
+	l = l.With().Err(fmt.Errorf("test error")).Logger()
+	l.Info().Msg("context test")
+
+	// Output: {"level":"info","name":"tst_logger","n":100,"b":false,"t":"test","error":"test error","message":"context test"}
 }

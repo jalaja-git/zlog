@@ -1,38 +1,37 @@
 package zlog
 
 import (
-	"errors"
+	"bytes"
+	"strings"
 	"testing"
 
 	. "github.com/smartystreets/goconvey/convey"
 )
 
 func TestLogger(t *testing.T) {
-	Convey("Every logger must have a name and level", t, func() {
+	Convey("With a logger", t, func() {
 		l := New("test_logger")
-		So(l.Name(), ShouldEqual, "test_logger")
-		So(l.LogLevel(), ShouldEqual, Debug)
-		So(l.Test(Debug), ShouldBeTrue)
-		l.Info().Str("hello", "world").Msg("Test")
-		l.Info().Int("Int value", 1000).Msg("Printing Int")
-		l.Info().Msg("Printing Message only")
-		l.Info().Timestamp().Msg("Testing Timestamp event")
+		Convey("I should be able to get name and level", func() {
+			So(l.Name(), ShouldEqual, "test_logger")
+			So(l.LogLevel(), ShouldEqual, Debug)
+			So(l.Test(Debug), ShouldBeTrue)
+		})
 
-		log := l.With().Str("with_key", "with_val").Logger()
-		log.Info().Msg("Str - With Testing")
+		Convey("I should be able to log a string with message", func() {
+			b := &bytes.Buffer{}
+			bl := l.Stream(b)
+			bl.Info().Str("hello", "world").Msg("Test")
+			So(strings.TrimSpace(b.String()), ShouldEqual, `{"level":"info","name":"test_logger","hello":"world","message":"Test"}`)
+		})
 
-		ilog := l.With().Int("with_key", 3000).Logger()
-		ilog.Info().Msg("Int - With Testing")
+		Convey("Disable Info log level", func() {
+			wl := l.Level(Warn)
+			So(wl.Info().Enabled(), ShouldBeFalse)
+		})
 
-		ilog = l.With().Int("with_key", 4000).Logger()
-		ilog.Info().Msg("Int  2nd time - With Testing")
-
-		ulog := ilog.With().Int("with_key", 5000).Logger()
-		ulog.Info().Msg("Int  3rd time - With Testing")
-
-		elog := l.With().Err(errors.New("some error")).Logger()
-		elog.Info().Msg("Printing Err - With Testing")
-		elog.Warn().Msg("Warning Printing Err - With Testing")
-
+		Convey("Fatal and panic events must be non-nil", func() {
+			So(l.Fatal(), ShouldNotBeNil)
+			So(l.Panic(), ShouldNotBeNil)
+		})
 	})
 }
