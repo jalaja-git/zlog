@@ -1,4 +1,4 @@
-package: golang.cisco.com/atom/zlog
+package: github.com/atom-deps/zlog
 import:
 - package: github.com/rs/zerolog
 testImport:

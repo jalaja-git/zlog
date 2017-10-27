@@ -1,8 +1,20 @@
 # :mag: ZLOG - Structured Logging Interface
 
-[![CircleCI](https://circleci.com/gh/atom-deps/zlog.svg?style=svg)](https://circleci.com/gh/atom-deps/zlog) [![Go Report Card](https://goreportcard.com/badge/github.com/atom-deps/zlog)](https://goreportcard.com/report/github.com/atom-deps/zlog) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4f78d06fcdab45248d9d7be646684fe8)](https://www.codacy.com/app/rchamarthy/zlog?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=atom-deps/zlog&amp;utm_campaign=Badge_Grade) [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/4f78d06fcdab45248d9d7be646684fe8)](https://www.codacy.com/app/rchamarthy/zlog?utm_source=github.com&utm_medium=referral&utm_content=atom-deps/zlog&utm_campaign=Badge_Coverage)
+[![GoDoc][doc-img]][doc] [![Build Status][ci-img]][ci] [![Coverage Status][cov-img]][cov] [![Go Report Card][report-card-img]][report-card]
 
 zlog aims to provide a consistent, easy to use structured logging interface.
 
 The interface is inspired by [zerolog](https://github.com/rs/zerolog) and uses
 it for the default implementation.
+
+[doc-img]: http://img.shields.io/badge/GoDoc-Reference-blue.svg
+[doc]: https://godoc.org/github.com/atom-deps/zlog
+
+[ci-img]: https://img.shields.io/travis/atom-deps/zlog/master.svg
+[ci]: https://travis-ci.org/uber-go/dig/branches
+
+[cov-img]: https://codecov.io/gh/atom-deps/zlog/branch/master/graph/badge.svg
+[cov]: https://codecov.io/gh/atom-deps/zlog/branch/master
+
+[report-card-img]: https://goreportcard.com/badge/github.com/atom-deps/zlog
+[report-card]: https://goreportcard.com/report/github.com/atom-deps/zlog

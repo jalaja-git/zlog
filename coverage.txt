@@ -1,0 +1,33 @@
+
+mode: atomic
+github.com/atom-deps/zlog/log.go:88.30,90.2 1 15
+github.com/atom-deps/zlog/log.go:96.64,98.2 1 15
+github.com/atom-deps/zlog/zerolog.go:16.32,18.2 1 1
+github.com/atom-deps/zlog/zerolog.go:20.35,22.2 1 1
+github.com/atom-deps/zlog/zerolog.go:24.39,26.2 1 1
+github.com/atom-deps/zlog/zerolog.go:28.47,30.2 1 1
+github.com/atom-deps/zlog/zerolog.go:32.45,34.2 1 1
+github.com/atom-deps/zlog/zerolog.go:36.42,39.2 2 3
+github.com/atom-deps/zlog/zerolog.go:41.33,45.2 3 5
+github.com/atom-deps/zlog/zerolog.go:47.32,49.2 1 1
+github.com/atom-deps/zlog/zerolog.go:51.31,53.2 1 9
+github.com/atom-deps/zlog/zerolog.go:55.31,57.2 1 3
+github.com/atom-deps/zlog/zerolog.go:59.32,61.2 1 3
+github.com/atom-deps/zlog/zerolog.go:63.32,65.2 1 1
+github.com/atom-deps/zlog/zerolog.go:67.32,69.2 1 1
+github.com/atom-deps/zlog/zerolog.go:71.64,74.2 2 15
+github.com/atom-deps/zlog/zerolog.go:80.54,83.2 2 7
+github.com/atom-deps/zlog/zerolog.go:85.51,88.2 2 1
+github.com/atom-deps/zlog/zerolog.go:90.35,92.2 1 3
+github.com/atom-deps/zlog/zerolog.go:94.36,96.2 1 13
+github.com/atom-deps/zlog/zerolog.go:98.42,101.2 2 1
+github.com/atom-deps/zlog/zerolog.go:105.38,108.2 2 1
+github.com/atom-deps/zlog/zerolog.go:114.75,117.2 2 1
+github.com/atom-deps/zlog/zerolog.go:119.66,123.2 3 1
+github.com/atom-deps/zlog/zerolog.go:130.34,133.2 2 5
+github.com/atom-deps/zlog/zerolog.go:135.54,138.2 2 3
+github.com/atom-deps/zlog/zerolog.go:140.51,143.2 2 1
+github.com/atom-deps/zlog/zerolog.go:147.43,148.16 1 2
+github.com/atom-deps/zlog/zerolog.go:151.2,151.10 1 2
+github.com/atom-deps/zlog/zerolog.go:148.16,150.3 1 1
+github.com/atom-deps/zlog/zerolog.go:155.53,159.2 2 1
