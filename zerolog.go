@@ -107,6 +107,21 @@ func (e eventImpl) Timestamp() Event {
 	return e
 }
 
+type zerologMarshalerAdapter struct {
+	om ObjectMarshaler
+}
+
+func (gzm zerologMarshalerAdapter) MarshalZerologObject(e *zerolog.Event) {
+	ne := eventImpl{e}
+	gzm.om.Marshal(ne)
+}
+
+func (e eventImpl) Object(key string, obj ObjectMarshaler) Event {
+	gzm := zerologMarshalerAdapter{obj}
+	e.Event.Object(key, gzm)
+	return e
+}
+
 type ctxImpl struct {
 	zerolog.Context
 	l logImpl

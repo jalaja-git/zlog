@@ -114,3 +114,19 @@ func ExampleContext_with() {
 
 	// Output: {"level":"info","name":"tst_logger","n":100,"b":false,"t":"test","error":"test error","message":"context test"}
 }
+
+type User struct {
+	Name string
+	ID   string
+}
+
+func (u *User) Marshal(e zlog.Event) {
+	e.Str("name", u.Name).Str("id", u.ID)
+}
+
+func ExampleEvent_object() {
+	log := zlog.New("tst_logger")
+	log.Info().Object("user", &User{"Jalaja", "Ganapathy"}).Msg("object test")
+
+	// Output: {"level":"info","name":"tst_logger","user":{"name":"Jalaja","id":"Ganapathy"},"message":"object test"}
+}

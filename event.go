@@ -1,5 +1,11 @@
 package zlog
 
+// ObjectMarshaler provides a strongly-typed encoding agnostic interface
+// to be implemented by custom types for efficient encoding
+type ObjectMarshaler interface {
+	Marshal(e Event)
+}
+
 // Event provides a log event interface.
 type Event interface {
 
@@ -25,4 +31,7 @@ type Event interface {
 
 	// Timestamp adds the current local time as UNIX timestamp to the Event context with the "time" key.
 	Timestamp() Event
+
+	// Object marshals a custom type that implements ObjectMarshaler interface.
+	Object(key string, obj ObjectMarshaler) Event
 }
