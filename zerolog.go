@@ -122,6 +122,18 @@ func (e eventImpl) Object(key string, obj ObjectMarshaler) Event {
 	return e
 }
 
+// Uint adds the field key with i as a uint to the Event context.
+func (e eventImpl) Uint(key string, i uint) Event {
+	e.Event.Uint(key, i)
+	return e
+}
+
+// Float32 adds the field key with f as a float32 to the *Event context.
+func (e eventImpl) Float32(key string, f float32) Event {
+	e.Event.Float32(key, f)
+	return e
+}
+
 type ctxImpl struct {
 	zerolog.Context
 	l logImpl
@@ -154,6 +166,5 @@ func (c ctxImpl) Error(err error) Context {
 // Bool adds the field key with val as a bool to the logger context.
 func (c ctxImpl) Bool(key string, val bool) Context {
 	c.Context = c.Context.Bool(key, val)
-	//c.l.Logger = c.Context.Logger()
 	return c
 }

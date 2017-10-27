@@ -34,4 +34,10 @@ type Event interface {
 
 	// Object marshals a custom type that implements ObjectMarshaler interface.
 	Object(key string, obj ObjectMarshaler) Event
+
+	// Uint adds the field key with i as a uint to the Event context.
+	Uint(key string, i uint) Event
+
+	// Float32 adds the field key with f as a float32 to the Event context.
+	Float32(key string, f float32) Event
 }
