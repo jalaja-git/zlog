@@ -7,7 +7,7 @@ zlog aims to provide a consistent, easy to use structured logging interface.
 The interface is inspired by [zerolog](https://github.com/rs/zerolog) and uses
 it for the default implementation that provides JSON.
 
-zlog's API mimics the chaining API style from zerolog/logrus to provide a simple and 
+zlog's API mimics the chaining API style from zerolog and logrus to provide a simple
 intuitive interface to the developers while allowing high performance implementations
 avoiding reflection and allocations.
 
