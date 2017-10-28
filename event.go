@@ -19,25 +19,28 @@ type Event interface {
 	// Calling Msg twice can have unexpected result.
 	Msg(msg string)
 
-	// Str adds the field key with val as a string to the Event context.
+	// Str adds the field key with val as a string to the event.
 	Str(key string, val string) Event
 
-	// Int adds the field key with i as a int to the Event context.
+	// Int adds the field key with i as a int to the event.
 	Int(key string, val int) Event
 
-	// Err adds the field "error" with err as a string to the Event context.
+	// Uint adds the field key with i as a uint to the event.
+	Uint(key string, i uint) Event
+
+	// Float32 adds the field key with f as a float32 to the event.
+	Float32(key string, f float32) Event
+
+	// Bool adds the field key with val as a bool to event.
+	Bool(key string, val bool) Event
+
+	// Err adds the field "error" with err as a string to the event.
 	// If err is nil, no field is added.
 	Error(e error) Event
 
-	// Timestamp adds the current local time as UNIX timestamp to the Event context with the "time" key.
+	// Timestamp adds the current local time as UNIX timestamp to the event.
 	Timestamp() Event
 
 	// Object marshals a custom type that implements ObjectMarshaler interface.
 	Object(key string, obj ObjectMarshaler) Event
-
-	// Uint adds the field key with i as a uint to the Event context.
-	Uint(key string, i uint) Event
-
-	// Float32 adds the field key with f as a float32 to the Event context.
-	Float32(key string, f float32) Event
 }

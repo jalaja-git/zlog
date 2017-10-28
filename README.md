@@ -36,7 +36,7 @@ log.Info().
     Int("n", 123).
     Msg("hello world")
 
-// Output: {"level":"info","time":1494567715,"foo":"bar","n":123,"message":"hello world"}
+// Output: {"level":"info",foo":"bar","n":123,"message":"hello world"}
 ```
 
 ### Create logger instance to manage different outputs
@@ -75,7 +75,6 @@ stdlog.Print("hello world")
 // Output: {"foo":"bar","message":"hello world"}
 ```
 
-
 ## Field Types
 
 ### Standard Types
@@ -91,6 +90,30 @@ stdlog.Print("hello world")
 * `Error`: Takes an `error` and render it as a string using the `zlog.ErrorFieldName` field name.
 * `Timestamp`: Insert a timestamp field with `zlog.TimestampFieldName` field name and formatted using `zlog.TimeFieldFormat`.
 
+## Performance
+
+```bash
+$ go test -bench=. -benchmem
+.........
+9 total assertions
+
+goos: darwin
+goarch: amd64
+pkg: github.com/atom-deps/zlog
+BenchmarkLogEmpty-8             50000000                31.2 ns/op             0 B/op          0 allocs/op
+BenchmarkDisabled-8             200000000                6.37 ns/op            0 B/op          0 allocs/op
+BenchmarkInfo-8                 30000000                50.7 ns/op             0 B/op          0 allocs/op
+BenchmarkContextFields-8        10000000               143 ns/op               0 B/op          0 allocs/op
+BenchmarkContextAppend-8        10000000               150 ns/op             832 B/op          3 allocs/op
+BenchmarkLogFields-8            10000000               229 ns/op               0 B/op          0 allocs/op
+BenchmarkLogFieldType/Int-8     30000000                49.1 ns/op             0 B/op          0 allocs/op
+BenchmarkLogFieldType/Str-8     30000000                43.7 ns/op             0 B/op          0 allocs/op
+BenchmarkLogFieldType/Err-8     30000000                49.5 ns/op             0 B/op          0 allocs/op
+BenchmarkLogFieldType/Object-8  10000000               109 ns/op              64 B/op          2 allocs/op
+BenchmarkLogFieldType/Bool-8    30000000                43.2 ns/op             0 B/op          0 allocs/op
+PASS
+ok      github.com/atom-deps/zlog       17.846s
+```
 
 [doc-img]: http://img.shields.io/badge/GoDoc-Reference-blue.svg
 [doc]: https://godoc.org/github.com/atom-deps/zlog

@@ -22,9 +22,10 @@ func ExampleLogger_info() {
 	log.Info().
 		Str("foo", "bar").
 		Int("n", 123).
+		Bool("b", true).
 		Msg("hello world")
 
-	// Output: {"level":"info","name":"tst_logger","foo":"bar","n":123,"message":"hello world"}
+	// Output: {"level":"info","name":"tst_logger","foo":"bar","n":123,"b":true,"message":"hello world"}
 }
 
 func ExampleLogger_warn() {
@@ -139,6 +140,14 @@ func (u *User) Marshal(e zlog.Event) {
 func ExampleEvent_object() {
 	log := zlog.New("tst_logger")
 	log.Info().Object("user", &User{"Jalaja", "Ganapathy"}).Msg("object test")
+
+	// Output: {"level":"info","name":"tst_logger","user":{"name":"Jalaja","id":"Ganapathy"},"message":"object test"}
+}
+
+func ExampleContext_with_object() {
+	log := zlog.New("tst_logger")
+	l := log.With().Object("user", &User{"Jalaja", "Ganapathy"}).Logger()
+	l.Info().Msg("object test")
 
 	// Output: {"level":"info","name":"tst_logger","user":{"name":"Jalaja","id":"Ganapathy"},"message":"object test"}
 }

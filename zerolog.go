@@ -100,6 +100,11 @@ func (e eventImpl) Error(er error) Event {
 	return e
 }
 
+func (e eventImpl) Bool(key string, val bool) Event {
+	e.Event.Bool(key, val)
+	return e
+}
+
 // Timestamp adds the current local time as UNIX timestamp to the *Event context with the "time" key.
 // To customize the key name, change zerolog.TimestampFieldName.
 func (e eventImpl) Timestamp() Event {
@@ -166,5 +171,26 @@ func (c ctxImpl) Error(err error) Context {
 // Bool adds the field key with val as a bool to the logger context.
 func (c ctxImpl) Bool(key string, val bool) Context {
 	c.Context = c.Context.Bool(key, val)
+	return c
+}
+
+func (c ctxImpl) Object(key string, obj ObjectMarshaler) Context {
+	gzm := zerologMarshalerAdapter{obj}
+	c.Context = c.Context.Object(key, gzm)
+	return c
+}
+
+func (c ctxImpl) Uint(key string, i uint) Context {
+	c.Context = c.Context.Uint(key, i)
+	return c
+}
+
+func (c ctxImpl) Float32(key string, f float32) Context {
+	c.Context = c.Context.Float32(key, f)
+	return c
+}
+
+func (c ctxImpl) Timestamp() Context {
+	c.Context = c.Context.Timestamp()
 	return c
 }

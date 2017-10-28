@@ -96,21 +96,3 @@ func New(name string) Logger {
 func NewWithStream(name string, w io.Writer, lvl Level) Logger {
 	return newZeroLogger(name, w, lvl)
 }
-
-// Context configures a new sub-logger with contextual fields.
-type Context interface {
-	// Logger returns the logger with the context previously set.
-	Logger() Logger
-
-	// Str adds the field key with val as a string to the logger context.
-	Str(key string, val string) Context
-
-	// Int adds the field key with i as a int to the logger context.
-	Int(key string, val int) Context
-
-	// Err adds the field "error" with err as a string to the logger context.
-	Error(e error) Context
-
-	// Bool adds the field key with val as a bool to the logger context.
-	Bool(key string, val bool) Context
-}
