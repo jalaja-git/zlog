@@ -35,5 +35,13 @@ func TestLogger(t *testing.T) {
 			So(l.Fatal(), ShouldNotBeNil)
 			So(l.Panic(), ShouldNotBeNil)
 		})
+
+		Convey("Context based timestamp must be in output", func() {
+			b := &bytes.Buffer{}
+			bl := l.Stream(b)
+			cl := bl.With().Timestamp().Logger()
+			cl.Info().Msg("")
+			So(strings.TrimSpace(b.String()), ShouldContainSubstring, "time")
+		})
 	})
 }

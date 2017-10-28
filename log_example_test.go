@@ -118,14 +118,14 @@ func ExampleContext_with() {
 	log := zlog.New("tst_logger")
 	ctx := log.With()
 	// Add Int, Bool and Str context to every log
-	l := ctx.Int("n", 100).Bool("b", false).Str("t", "test").Logger()
+	l := ctx.Int("n", 100).Bool("b", false).Str("t", "test").Uint("u", 1).Float32("f", 1.1).Logger()
 	// Add Error context in addition to  above contexts.
 	l = l.With().Error(nil).Logger()
 	// Add one more Error Event in addition to above contexts.
 	l = l.With().Error(fmt.Errorf("test error")).Logger()
 	l.Info().Msg("context test")
 
-	// Output: {"level":"info","name":"tst_logger","n":100,"b":false,"t":"test","error":"test error","message":"context test"}
+	// Output: {"level":"info","name":"tst_logger","n":100,"b":false,"t":"test","u":1,"f":1.1,"error":"test error","message":"context test"}
 }
 
 type User struct {
