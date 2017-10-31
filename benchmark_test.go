@@ -100,16 +100,16 @@ func BenchmarkLogFieldType(b *testing.B) {
 	ints := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 	strings := []string{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"}
 	objects := []obj{
-		obj{"a", "a", 0},
-		obj{"a", "a", 0},
-		obj{"a", "a", 0},
-		obj{"a", "a", 0},
-		obj{"a", "a", 0},
-		obj{"a", "a", 0},
-		obj{"a", "a", 0},
-		obj{"a", "a", 0},
-		obj{"a", "a", 0},
-		obj{"a", "a", 0},
+		{"a", "a", 0},
+		{"a", "a", 0},
+		{"a", "a", 0},
+		{"a", "a", 0},
+		{"a", "a", 0},
+		{"a", "a", 0},
+		{"a", "a", 0},
+		{"a", "a", 0},
+		{"a", "a", 0},
+		{"a", "a", 0},
 	}
 	errs := []error{errors.New("a"), errors.New("b"), errors.New("c"), errors.New("d"), errors.New("e")}
 	types := map[string]func(e Event) Event{
