@@ -31,10 +31,7 @@ log.Info().Msg("hello world")
 ### Fields can be added to log messages
 
 ```go
-log.Info().
-    Str("foo", "bar").
-    Int("n", 123).
-    Msg("hello world")
+log.Info().Str("foo", "bar").Int("n", 123).Msg("hello world")
 
 // Output: {"level":"info",foo":"bar","n":123,"message":"hello world"}
 ```
@@ -52,9 +49,7 @@ logger.Info().Str("foo", "bar").Msg("hello world")
 ### Sub-loggers let you chain loggers with additional context
 
 ```go
-sublogger := log.With().
-                 Str("component": "foo").
-                 Logger()
+sublogger := log.With().Str("component": "foo").Logger()
 sublogger.Info().Msg("hello world")
 
 // Output: {"level":"info","time":1494567715,"message":"hello world","component":"foo"}
@@ -63,9 +58,7 @@ sublogger.Info().Msg("hello world")
 ### Set as standard logger output
 
 ```go
-log := zlog.New("test_logger).With().
-    Str("foo", "bar").
-    Logger()
+log := zlog.New("test_logger").With().Str("foo", "bar").Logger()
 
 stdlog.SetFlags(0)
 stdlog.SetOutput(log)
@@ -87,8 +80,8 @@ stdlog.Print("hello world")
 
 ### Advanced Fields
 
-* `Error`: Takes an `error` and render it as a string using the `zlog.ErrorFieldName` field name.
-* `Timestamp`: Insert a timestamp field with `zlog.TimestampFieldName` field name and formatted using `zlog.TimeFieldFormat`.
+* `Error`: Takes an `error` and render it as a string using the `error` field name.
+* `Timestamp`: Insert a timestamp field with `time` field name and formatted using [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format.
 
 ## Performance
 
