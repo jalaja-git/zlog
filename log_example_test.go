@@ -19,11 +19,7 @@ func ExampleNew() {
 func ExampleLogger_info() {
 	log := zlog.New("tst_logger")
 
-	log.Info().
-		Str("foo", "bar").
-		Int("n", 123).
-		Bool("b", true).
-		Msg("hello world")
+	log.Info().Str("foo", "bar").Int("n", 123).Bool("b", true).Msg("hello world")
 
 	// Output: {"level":"info","name":"tst_logger","foo":"bar","n":123,"b":true,"message":"hello world"}
 }
@@ -31,9 +27,7 @@ func ExampleLogger_info() {
 func ExampleLogger_warn() {
 	log := zlog.New("tst_logger")
 
-	log.Warn().
-		Str("foo", "bar").
-		Msg("a warning message")
+	log.Warn().Str("foo", "bar").Msg("a warning message")
 
 	// Output: {"level":"warn","name":"tst_logger","foo":"bar","message":"a warning message"}
 }
@@ -41,19 +35,14 @@ func ExampleLogger_warn() {
 func ExampleLogger_error() {
 	log := zlog.New("tst_logger")
 
-	log.Error().
-		Error(errors.New("some error")).
-		Msg("error doing something")
+	log.Error().Error(errors.New("some error")).Msg("error doing something")
 
 	// Output: {"level":"error","name":"tst_logger","error":"some error","message":"error doing something"}
 }
 func ExampleLogger_msg() {
 	log := zlog.New("tst_logger")
 
-	log.Debug().
-		Str("foo", "bar").
-		Str("bar", "baz").
-		Msg("")
+	log.Debug().Str("foo", "bar").Str("bar", "baz").Msg("")
 
 	// Output: {"level":"debug","name":"tst_logger","foo":"bar","bar":"baz"}
 }
@@ -68,10 +57,7 @@ func ExampleLogger_level() {
 }
 
 func ExampleLogger_with() {
-	log := zlog.New("tst_logger").
-		With().
-		Str("foo", "bar").
-		Logger()
+	log := zlog.New("tst_logger").With().Str("foo", "bar").Logger()
 
 	log.Info().Msg("hello world")
 
@@ -79,9 +65,7 @@ func ExampleLogger_with() {
 }
 
 func ExampleLogger_write() {
-	log := zlog.New("tst_logger").With().
-		Str("foo", "bar").
-		Logger()
+	log := zlog.New("tst_logger").With().Str("foo", "bar").Logger()
 
 	stdlog.SetFlags(0)
 	stdlog.SetOutput(log)
