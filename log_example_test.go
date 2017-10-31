@@ -5,7 +5,7 @@ import (
 	"fmt"
 	stdlog "log"
 
-	"github.com/atom-deps/zlog"
+	"github.com/anuvu/zlog"
 )
 
 func ExampleNew() {

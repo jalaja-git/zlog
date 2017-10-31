@@ -11,7 +11,7 @@ zlog's API mimics the chaining API style from zerolog and logrus to provide a si
 intuitive interface to the developers while allowing high performance implementations
 avoiding reflection and allocations.
 
-Refer complete documentation : https://godoc.org/github.com/atom-deps/zlog
+Refer complete documentation : https://godoc.org/github.com/anuvu/zlog
 
 ## Features
 
@@ -22,7 +22,7 @@ Refer complete documentation : https://godoc.org/github.com/atom-deps/zlog
 ## Usage
 
 ```go
-import "github.com/atom-deps/zlog"
+import "github.com/anuvu/zlog"
 log.Info().Msg("hello world")
 
 // Output: {"level":"info","time":1494567715,"message":"hello world"}
@@ -99,7 +99,7 @@ $ go test -bench=. -benchmem
 
 goos: darwin
 goarch: amd64
-pkg: github.com/atom-deps/zlog
+pkg: github.com/anuvu/zlog
 BenchmarkLogEmpty-8             50000000                31.2 ns/op             0 B/op          0 allocs/op
 BenchmarkDisabled-8             200000000                6.37 ns/op            0 B/op          0 allocs/op
 BenchmarkInfo-8                 30000000                50.7 ns/op             0 B/op          0 allocs/op
@@ -112,17 +112,17 @@ BenchmarkLogFieldType/Err-8     30000000                49.5 ns/op             0
 BenchmarkLogFieldType/Object-8  10000000               109 ns/op              64 B/op          2 allocs/op
 BenchmarkLogFieldType/Bool-8    30000000                43.2 ns/op             0 B/op          0 allocs/op
 PASS
-ok      github.com/atom-deps/zlog       17.846s
+ok      github.com/anuvu/zlog       17.846s
 ```
 
 [doc-img]: http://img.shields.io/badge/GoDoc-Reference-blue.svg
-[doc]: https://godoc.org/github.com/atom-deps/zlog
+[doc]: https://godoc.org/github.com/anuvu/zlog
 
-[ci-img]: https://img.shields.io/travis/atom-deps/zlog/master.svg
+[ci-img]: https://img.shields.io/travis/anuvu/zlog/master.svg
 [ci]: https://travis-ci.org/uber-go/dig/branches
 
-[cov-img]: https://codecov.io/gh/atom-deps/zlog/branch/master/graph/badge.svg
-[cov]: https://codecov.io/gh/atom-deps/zlog/branch/master
+[cov-img]: https://codecov.io/gh/anuvu/zlog/branch/master/graph/badge.svg
+[cov]: https://codecov.io/gh/anuvu/zlog/branch/master
 
-[report-card-img]: https://goreportcard.com/badge/github.com/atom-deps/zlog
-[report-card]: https://goreportcard.com/report/github.com/atom-deps/zlog
+[report-card-img]: https://goreportcard.com/badge/github.com/anuvu/zlog
+[report-card]: https://goreportcard.com/report/github.com/anuvu/zlog

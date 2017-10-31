@@ -1,4 +1,4 @@
-package: github.com/atom-deps/zlog
+package: github.com/anuvu/zlog
 import:
 - package: github.com/rs/zerolog
 testImport:
