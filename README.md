@@ -112,7 +112,7 @@ ok      github.com/anuvu/zlog       17.846s
 [doc]: https://godoc.org/github.com/anuvu/zlog
 
 [ci-img]: https://img.shields.io/travis/anuvu/zlog/master.svg
-[ci]: https://travis-ci.org/uber-go/dig/branches
+[ci]: https://travis-ci.org/anuvu/zlog/branches
 
 [cov-img]: https://codecov.io/gh/anuvu/zlog/branch/master/graph/badge.svg
 [cov]: https://codecov.io/gh/anuvu/zlog/branch/master
